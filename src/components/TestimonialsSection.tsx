@@ -125,4 +125,4 @@ const RightArrow = () => (
   </svg>
 );
 
-export default CtaSection;
+export default TestimonialsSection;
