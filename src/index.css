@@ -2,17 +2,163 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-The @apply directive should not be used with the group utility class.
-*/
-
 @layer base {
   :root {
-   
+    /* Core Colors - Blue theme extracted from design */
+    --primary: 210 60% 60%; /* #6BA3E6 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 60% 75%; /* #AFDFD8 */
+    --secondary-foreground: 220 30% 25%;
+    
+    /* Background gradients */
+    --gradient-primary: linear-gradient(90deg, #6BA3E6 0%, #AFDFD8 100%);
+    --gradient-hero: linear-gradient(102deg, #2C5078 28%, #5194DE 64%);
+    --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.20) 100%, rgba(30,66,159,0.20) 100%);
+    
+    /* Design system colors */
+    --background: 220 40% 25%; /* Dark blue background */
+    --foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 25%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 25%;
+    --muted: 220 15% 85%;
+    --muted-foreground: 220 15% 40%;
+    --accent: 220 15% 95%;
+    --accent-foreground: 220 30% 25%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
+    --ring: 210 60% 60%;
+    --radius: 0.75rem;
+    
+    /* Brand specific */
+    --brand-blue: 220 40% 35%; /* #1F436E */
+    --brand-light-blue: 210 50% 85%; /* Light blue cards */
+    --gradient-text: linear-gradient(89deg, #FF557D 2.24%, #A656FF 31.41%, #2793FF 64.95%, #01C2AA 98.49%);
   }
+}
 
-  .dark {
+@layer components {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(40px);
+  }
+  
+  .text-gradient {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .hero-button {
+    @apply relative cursor-pointer rounded-full px-4 text-sm font-medium text-white shadow-[0_0_24px_rgba(34,42,53,0.06),0_1px_1px_rgba(0,0,0,0.05),0_0_0_1px_rgba(34,42,53,0.04),0_0_4px_rgba(34,42,53,0.08),0_16px_68px_rgba(47,48,55,0.05),0_1px_0_rgba(255,255,255,0.1)_inset] transition-all hover:-translate-y-0.5 focus:scale-90;
+    background: var(--gradient-primary);
+  }
+  
+  .hero-button-large {
+    @apply h-10 md:h-14 md:px-8 md:text-xl;
+  }
+  
+  .hero-button-small {
+    @apply h-10 px-4 text-sm;
+  }
+  
+  .nav-button {
+    @apply relative px-4 py-2 text-white transition-colors;
+  }
+  
+  .nav-button-active {
+    @apply nav-button;
+  }
+  
+  .nav-button-active::before {
+    content: '';
+    @apply absolute inset-0 h-full w-full rounded-full bg-gray-800/30;
+  }
+  
+  .marquee-card {
+    @apply relative flex h-18 w-72 items-center rounded-2xl bg-blue-100/50 px-4 text-sm text-gray-700 transition-all hover:bg-blue-50 md:h-24 md:w-82 md:text-base;
+  }
+  
+  .testimonial-card {
+    @apply relative flex h-80 w-70 cursor-pointer flex-col justify-between overflow-hidden rounded-xl bg-gray-100/90 px-6 pt-5 pb-7 shadow-[0_4px_8px_0_rgba(0,0,0,0.04)] transition-colors hover:bg-white md:h-100 md:w-90;
+  }
+  
+  .feature-card {
+    @apply overflow-hidden rounded-2xl bg-white shadow-[0_4px_8px_0_rgba(0,0,0,0.04)] md:col-span-7;
+  }
+  
+  .data-type-card {
+    @apply relative block cursor-pointer overflow-hidden rounded-2xl px-4 pt-3 pb-4 shadow-[0_4px_8px_0_rgba(0,0,0,0.04)] transition-all duration-300 ease-in-out;
+  }
+  
+  .data-type-card-active {
+    @apply data-type-card bg-white;
+  }
+  
+  .data-type-card-inactive {
+    @apply data-type-card bg-white/20 hover:bg-white/80;
+  }
+  
+  .explore-button {
+    @apply mt-4 flex cursor-pointer items-center gap-2 rounded-full bg-[#1F436E] py-1.5 pr-5 pl-6 text-base font-semibold text-white shadow-[0_1px_6px_-2px_rgba(30,40,77,0.08),0_2px_6px_-1px_rgba(30,40,77,0.10)] transition-all hover:opacity-80;
+  }
+}
 
+@layer utilities {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes blurry-blob {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(20px, -20px) scale(1.1);
+    }
+    50% {
+      transform: translate(-10px, 20px) scale(0.9);
+    }
+    75% {
+      transform: translate(-20px, -10px) scale(1.05);
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee var(--duration, 80s) linear infinite;
+  }
+  
+  .animate-blurry-blob {
+    animation: blurry-blob 20s infinite;
+  }
+  
+  .bg-hero-gradient {
+    background: linear-gradient(102deg, #2C5078 28%, #5194DE 64%);
+  }
+  
+  .bg-primary-gradient {
+    background: linear-gradient(90deg, #6BA3E6 0%, #AFDFD8 100%);
+  }
+  
+  .bg-card-gradient {
+    background: linear-gradient(180deg, rgba(255,255,255,0.20) 100%, rgba(30,66,159,0.20) 100%);
+    backdrop-filter: blur(40px);
   }
 }
