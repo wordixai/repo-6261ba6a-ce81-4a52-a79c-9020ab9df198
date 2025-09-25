@@ -88,11 +88,11 @@
   }
   
   .marquee-card {
-    @apply relative flex h-18 w-72 items-center rounded-2xl bg-blue-100/50 px-4 text-sm text-gray-700 transition-all hover:bg-blue-50 md:h-24 md:w-82 md:text-base;
+    @apply relative flex h-20 w-72 items-center rounded-2xl bg-blue-100/50 px-4 text-sm text-gray-700 transition-all hover:bg-blue-50 md:h-24 md:w-80 md:text-base;
   }
   
   .testimonial-card {
-    @apply relative flex h-80 w-70 cursor-pointer flex-col justify-between overflow-hidden rounded-xl bg-gray-100/90 px-6 pt-5 pb-7 shadow-[0_4px_8px_0_rgba(0,0,0,0.04)] transition-colors hover:bg-white md:h-100 md:w-90;
+    @apply relative flex h-80 w-72 cursor-pointer flex-col justify-between overflow-hidden rounded-xl bg-gray-100/90 px-6 pt-5 pb-7 shadow-[0_4px_8px_0_rgba(0,0,0,0.04)] transition-colors hover:bg-white md:h-96 md:w-80;
   }
   
   .feature-card {
